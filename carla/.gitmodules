@@ -1,0 +1,8 @@
+[submodule "Unreal/CarlaUE4/Plugins/VAPlugin/unreal-va-plugin"]
+	path = Unreal/CarlaUE4/Plugins/VAPlugin/unreal-va-plugin
+	url = https://git-ce.rwth-aachen.de/vr-vis/VR-Group/unreal-development/plugins/unreal-va-plugin.git
+	branch = 4.26
+[submodule "Unreal/CarlaUE4/Plugins/rwth-vr-toolkit"]
+	path = Unreal/CarlaUE4/Plugins/rwth-vr-toolkit
+	url = https://git-ce.rwth-aachen.de/vr-vis/VR-Group/unreal-development/plugins/rwth-vr-toolkit.git
+	branch = 4.26

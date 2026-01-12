@@ -1,0 +1,11 @@
+carla_ros_workspace/
+carla_steeringWheel/
+blenderOpenDRIVEImporter/
+!Unreal/CarlaUE4/Plugins
+Unreal/CarlaUE4/Plugins/Streetmap
+Unreal/CarlaUE4/Plugins/HoudiniEngine
+Unreal/CarlaUE4/Plugins/RoadRunnerImporter
+Unreal/CarlaUE4/Plugins/RoadRunnerMaterials
+Unreal/CarlaUE4/Plugins/RoadRunnerRuntime
+Unreal/CarlaUE4/Plugins/rwth-vr-toolkit
+Unreal/CarlaUE4/Plugins/VAPlugin

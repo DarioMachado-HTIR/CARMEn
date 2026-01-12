@@ -1,0 +1,3 @@
+[submodule "carla/PythonAPI/carla/PyGameWidgets"]
+	path = carla/PythonAPI/carla/PyGameWidgets
+	url = https://github.com/EricsonWillians/PyGameWidgets.git

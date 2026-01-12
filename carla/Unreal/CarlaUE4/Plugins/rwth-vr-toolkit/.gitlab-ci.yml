@@ -1,0 +1,110 @@
+#-------------------------------------------------------------------------------
+# Copyright (c) 2022 RWTH Aachen University, Germany,
+# Virtual Reality & Immersive Visualisation Group.
+#-------------------------------------------------------------------------------
+
+# The include file can be change to either be removed or reference a specific commit.
+
+include:
+  - project: '${UNREAL_CI_PROJECT}'
+    ref: master 
+    file: '/shared_scripts.yml'
+    
+# In this file you are able to configure your plugins pipeline.
+# If you want to customize something, either overwrite things that are defined in the shared_scripts repository,
+# or remove the "extends" and write your own scripts
+# 
+# If you want your pipeline to run on every commit, just remove the "only" blocks. Keep in mind, that a build
+# can take some time.
+# 
+# If you want to alter the unreal-building process two variables are defined for either changing the CLIENT_CONFIG or
+# for adding EXTRA_ARGS to the building process
+# 
+# For the generate stage, you can specify needed dependencies in GEN_DEPENDENCIES with [Branch@PluginFolder] as key
+# Example:
+#
+# Generate_Project:
+#    only: ['web', 'schedules']
+#    extends: .Generate_Project_
+#    variables:
+#        GEN_TEMPLATE_REPO: "https://git-ce.rwth-aachen.de/vr-vis/VR-Group/unreal-development/unrealprojecttemplate.git"
+#        GEN_TEMPLATE_BRANCH: "4.26"
+#        GEN_DEPENDENCIES: "(
+#            [4.26@RWTHVRToolkit]='https://git-ce.rwth-aachen.de/vr-vis/VR-Group/unreal-development/Plugins/rwth-vr-toolkit.git'
+#            [4.26@UniversalLogging]='https://git-ce.rwth-aachen.de/vr-vis/VR-Group/unreal-development/Plugins/universallogging.git'
+#        )"
+#
+# You can uncomment the deploy lines to deploy your project to the CAVE/VRDev. This only makes sense, if your plugin works
+# with a generated project.
+
+variables:
+    UNREAL_VERSION: "4.26"
+
+stages:
+  - generate
+  - build
+  - deploy
+
+Generate_Project:
+    rules: 
+      - if: $CI_PIPELINE_SOURCE == "web"
+      - if: $CI_PIPELINE_SOURCE == "schedule"
+    extends: .Generate_Project_
+    variables:
+        RUN_SETUP: "false"
+        GEN_TEMPLATE_BRANCH: "4.26"
+
+Build_Windows:
+    rules: 
+      - if: $CI_PIPELINE_SOURCE == "web"
+      - if: $CI_PIPELINE_SOURCE == "schedule"
+    extends: .Build_Windows_
+    tags:
+        - windows
+        - unreal
+    variables:
+        GIT_STRATEGY: none   
+        GIT_CHECKOUT: "false"
+        # CLIENT_CONFIG: "Shipping"
+        CLIENT_CONFIG: "DebugGame"
+    needs:
+        - job: "Generate_Project"
+          artifacts: true
+    
+Build_Linux:
+    rules: 
+      - if: $CI_PIPELINE_SOURCE == "web"
+      - if: $CI_PIPELINE_SOURCE == "schedule"
+    extends: .Build_Linux_
+    # override image from base script as there is no official 4.26 image
+    image: registry.git-ce.rwth-aachen.de/vr-vis/vr-group/unreal-development/unreal-docker-ci-images/4-26_linux
+    tags:
+        - linux
+        - unreal
+    variables:
+        GIT_STRATEGY: none   
+        GIT_CHECKOUT: "false"
+        # CLIENT_CONFIG: "Shipping"
+        CLIENT_CONFIG: "DebugGame"
+    needs:
+        - job: "Generate_Project"
+          artifacts: true
+
+Deploy_Windows:
+    rules: 
+      - if: $CI_PIPELINE_SOURCE == "web"
+      - if: $CI_PIPELINE_SOURCE == "schedule"
+    extends: .Deploy_VRDev_
+    needs:
+        - job: "Build_Windows"
+          artifacts: true          
+
+Deploy_CAVE:
+    rules: 
+      - if: $CI_PIPELINE_SOURCE == "web"
+      - if: $CI_PIPELINE_SOURCE == "schedule"
+    extends: .Deploy_CAVE_
+    needs:
+        - job: "Build_Linux"
+          artifacts: true
+
