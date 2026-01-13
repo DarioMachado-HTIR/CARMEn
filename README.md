@@ -33,4 +33,4 @@ CARLA was developed and is meing mantained by the Computer Vision Centre and the
 Unreal Engine 4 follows its [own license terms](https://www.unrealengine.com/en-US/faq).
 
 CARMEN uses on dependecy as part of its GUI integration:
-- [PyGameWidgets](https://github.com/EricsonWillians/PyGameWidgets), a straightforward widget toolkit for Pygame, whihc uses the [GPL-3.0 license](http://fsf.org/)
+- [PyGameWidgets](https://github.com/EricsonWillians/PyGameWidgets), a straightforward widget toolkit for Pygame, which uses the [GPL-3.0 license](http://fsf.org/)
