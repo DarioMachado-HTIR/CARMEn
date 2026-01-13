@@ -12,14 +12,6 @@ CARMEn further integrates augmented virtuality to enhance immersion for driver a
 
 To complement the visual immersion, CARMEn incorporates realistic acoustic simulation using Unreal Engine’s Steam Audio plugin. The system simulates a dynamic virtual acoustic environment with physics-based sound propagation, including attenuation, occlusion, and reflections based on scene geometry and material properties. Binaural rendering is applied to produce accurate spatial audio for each agent’s point of view. Environmental sounds, vehicle engine and tire noise, and ambisonic background ambience contribute to a coherent auditory scene, while audio filtering inside the vehicle simulates the acoustic characteristics of a real cockpit.
 
-## About CARLA
-
-CARLA was developed and is meing mantained by the Computer Vision Centre and the Embodied AI Foundation.
-
-[Homepage](http://carla.org)
-
-[Paper](http://proceedings.mlr.press/v78/dosovitskiy17a/dosovitskiy17a.pdf)
-
 ## Licenses
 
 CARMEn specific code is distributed under MIT License.
@@ -31,6 +23,12 @@ CARMEn specific assets are distributed under CC-BY License.
 CARMEn uses CARLA as its foundation:
 - CARLA follows MIT ( Copyright (c) 2017 Computer Vision Center (CVC) at the Universitat Autonoma de Barcelona (UAB) ) and CC-BY License. 
 - CARLA Licences Dependecies and Integration follow the licences defined in its own README [https://github.com/carla-simulator/carla/blob/master/README.md].
+
+CARLA was developed and is meing mantained by the Computer Vision Centre and the Embodied AI Foundation.
+
+[Homepage](http://carla.org)
+
+[Paper](http://proceedings.mlr.press/v78/dosovitskiy17a/dosovitskiy17a.pdf)
 
 Unreal Engine 4 follows its [own license terms](https://www.unrealengine.com/en-US/faq).
 
